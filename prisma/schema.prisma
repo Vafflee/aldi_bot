@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  tgId  String  @unique
+  job   String?
+  role  String  @default("User")
+  requests Request[]  @relation("SentRequests")
+  sentThanks  ThankYou[] @relation("SentThanks")
+  recievedThanks  ThankYou[] @relation("RecievedThanks")
+}
+
+model ThankYou {
+  id          Int     @id @default(autoincrement())
+  authorId    Int
+  author      User @relation("SentThanks", fields: [authorId], references: [id])
+  recipientId Int
+  recipient   User @relation("RecievedThanks", fields: [recipientId], references: [id])
+}
+
+model Request {
+  id          Int     @id @default(autoincrement())
+  userId      Int
+  user        User    @relation("SentRequests", fields: [userId], references: [id])
+  role        String
+  isApproved  Boolean   @default(false)
+}

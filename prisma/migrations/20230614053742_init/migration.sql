@@ -1,0 +1,16 @@
+-- CreateTable
+CREATE TABLE "ThankYou" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "authorId" INTEGER NOT NULL,
+    "recipientId" INTEGER NOT NULL,
+    CONSTRAINT "ThankYou_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "ThankYou_recipientId_fkey" FOREIGN KEY ("recipientId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Request" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "userId" INTEGER NOT NULL,
+    "isApproved" BOOLEAN NOT NULL DEFAULT false,
+    CONSTRAINT "Request_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
