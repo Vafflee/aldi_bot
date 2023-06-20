@@ -10,5 +10,8 @@
     "jsx": "react-jsx"
   },
   "include": ["src/**/*"],
-  "outDir": "dist"
+  "moduleResolution": "node",
+  "target": "esnext",
+  "baseUrl": "./src",
+  "outDir": "./dist"
 }
