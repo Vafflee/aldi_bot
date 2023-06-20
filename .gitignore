@@ -133,3 +133,5 @@ dist
 prisma/db.db
 prisma/db.db-journal
 sessions.sqlite
+
+build
