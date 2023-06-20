@@ -34,11 +34,18 @@ export async function getRequestByUserId(userId: number) {
   });
 }
 
-export async function createRequest(userId: number, requestedRole: UserRole) {
+export async function createRequest(
+  userId: number,
+  fullName: string,
+  job: string,
+  requestedRole: UserRole
+) {
   return await db.request.create({
     data: {
       userId: userId,
       role: requestedRole,
+      fullName,
+      job,
     },
   });
 }

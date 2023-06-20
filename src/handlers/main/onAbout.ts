@@ -1,5 +1,6 @@
 import { Context } from "telegraf";
+import { ABOUT_TEXT } from "../../constants/texts";
 
 export function onAbout(ctx: Context) {
-  ctx.reply("Сообщение о компании");
+  ctx.reply(ABOUT_TEXT);
 }

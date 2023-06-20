@@ -130,5 +130,6 @@ dist
 .pnp.*
 
 # Databases
-prisma/dev.db
+prisma/db.db
+prisma/db.db-journal
 sessions.sqlite

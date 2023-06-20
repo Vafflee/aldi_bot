@@ -10,8 +10,9 @@ export const URLS = {
   LOCAL_ACTS:
     "https://development-alabuga.notion.site/90e024a9ad50402eb0dd9951d45c6f43",
   MAPS: {
-    ROUTES:
-      "https://development-alabuga.notion.site/5284b495d35d4f81ba16f816befdd4ba",
+    INNER_ROUTES:
+      "https://development-alabuga.notion.site/ccab1ef1d3b444dd9499ec678cdf79b1",
+    ROUTES: "https://вахта-алабуга.рф",
     ALABUGA:
       "https://www.google.com/maps/d/u/1/viewer?mid=1DC4KjTGLs9PRs_ukK_y823A6xMcl_DAk",
     ELABUGA:
@@ -24,4 +25,8 @@ export const URLS = {
     DEVELOPMENT:
       "https://development-alabuga.notion.site/a115e46381444a62871c01a24be5144c?v=9a16677c89544fd2937c539f4d21be60",
   },
+};
+
+const WA_ROUTES = {
+  INDEX: "",
 };
