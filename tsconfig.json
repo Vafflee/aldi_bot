@@ -7,11 +7,11 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "outDir": "./build"
   },
   "include": ["src/**/*"],
   "moduleResolution": "node",
   "target": "esnext",
-  "baseUrl": "./src",
-  "outDir": "./build"
 }
