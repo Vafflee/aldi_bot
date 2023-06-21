@@ -4,13 +4,7 @@ import { sendFoxPicture } from "../../helpers/fun/sendFoxPicture";
 import { MyContext } from "../../types";
 
 export async function onImBored(ctx: MyContext) {
-  const funcs = [
-    // sendRandomMeme,
-    sendCatPicture,
-    sendDogPicture,
-    sendFoxPicture,
-    // sendActivity
-  ];
+  const funcs = [sendCatPicture, sendDogPicture, sendFoxPicture];
   const funcToExec = funcs[Math.floor(Math.random() * funcs.length)];
   funcToExec(ctx);
 }

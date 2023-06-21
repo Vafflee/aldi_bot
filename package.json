@@ -5,9 +5,8 @@
   "repository": "https://github.com/Vafflee/aldi_bot",
   "license": "MIT",
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.4",
-    "@types/jsdom": "^21.1.1",
     "@types/node": "^20.3.1",
+    "@types/pg": "^8.10.2",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
     "cross-env": "^7.0.3",
@@ -25,13 +24,14 @@
     "typescript": "*"
   },
   "scripts": {
-    "start": "NODE_PATH=./build node build/index.js",
+    "start": "node ./build/index.js",
+    "start:migrate": "prisma migrate deploy && yarn start",
     "build": "tsc -p .",
     "dev": "nodemon src/index.ts",
     "prepare": "husky install",
     "precommit-hook": "yarn run check-types && lint-staged",
     "check-types": "tsc --noEmit",
-    "db": "docker run --name aldi-pg -p 5432:5432 -e POSTGRES_USER=aldibotadmin -e POSTGRES_PASSWORD=aldibotpgpwd -e POSTGRES_DB=aldibotpg -d postgres"
+    "db": "docker-compose up -d --build"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
@@ -45,16 +45,13 @@
     }
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.5",
     "@prisma/client": "^4.15.0",
     "@telegraf/session": "^2.0.0-beta.6",
-    "@vitalets/google-translate-api": "^9.2.0",
     "axios": "^1.4.0",
-    "better-sqlite3": "^8.4.0",
     "dotenv": "^16.1.4",
     "eslint": "^8.42.0",
-    "jsdom": "^22.1.0",
     "kysely": "^0.25.0",
+    "pg": "^8.11.0",
     "prisma": "^4.15.0",
     "telegraf": "^4.12.3-canary.1"
   }

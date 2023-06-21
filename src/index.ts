@@ -1,4 +1,4 @@
-import { SQLite } from "@telegraf/session/sqlite";
+import { Postgres } from "@telegraf/session/pg";
 import { config } from "dotenv";
 import { Markup, Scenes, Telegraf, session } from "telegraf";
 import { MAIN_BUTTONS } from "./constants/buttons";
@@ -23,13 +23,7 @@ import { MyContext } from "./types";
 config();
 
 const tgToken = process.env.TG_TOKEN;
-// const ntToken = process.env.NOTION_TOKEN;
 if (!tgToken) throw new Error("No TG_TOKEN");
-// if (!ntToken) throw new Error("No NOTION_TOKEN");
-
-// const notion = new Client({
-//   auth: ntToken,
-// });
 
 const bot = new Telegraf<MyContext>(tgToken);
 
@@ -46,8 +40,11 @@ bot.use(useUser);
 bot.use(setIsStaffAndIsAdmin);
 
 // Use Sessions storage
-const store = SQLite<object>({
-  filename: "./sessions.sqlite",
+const store = Postgres<object>({
+  host: "127.0.0.1",
+  database: "aldibotpg",
+  user: "aldibotadmin",
+  password: "aldibotpgpwd",
 });
 bot.use(session({ store }));
 
