@@ -23,7 +23,13 @@ import { MyContext } from "./types";
 config();
 
 const tgToken = process.env.TG_TOKEN;
+const dbHost = process.env.DB_HOST;
+const dbName = process.env.DB_NAME;
+const dbUser = process.env.DB_USER;
+const dbPass = process.env.DB_PASSWORD;
+const dbPort = process.env.DB_PORT;
 if (!tgToken) throw new Error("No TG_TOKEN");
+if (!(dbHost && dbName && dbUser && dbPass && dbPort)) throw new Error("No DB requisites")
 
 const bot = new Telegraf<MyContext>(tgToken);
 
@@ -41,10 +47,10 @@ bot.use(setIsStaffAndIsAdmin);
 
 // Use Sessions storage
 const store = Postgres<object>({
-  host: "127.0.0.1",
-  database: "aldibotpg",
-  user: "aldibotadmin",
-  password: "aldibotpgpwd",
+  host: dbHost,
+  database: dbName,
+  user: dbUser,
+  password: dbPass,
 });
 bot.use(session({ store }));
 

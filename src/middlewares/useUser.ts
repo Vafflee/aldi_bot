@@ -18,6 +18,7 @@ export async function useUser(ctx: MyContext, next: NextFn) {
       }));
     await next();
   } catch (err) {
+    console.log('! useUser.ts error !')
     console.error(err);
     await next();
   }
