@@ -24,10 +24,11 @@
     "typescript": "*"
   },
   "scripts": {
-    "start": "NODE_PATH=./build node ./build/index.js",
-    "start:migrate": "prisma migrate deploy && yarn start",
+    "start": "node ./build/index.js",
+    "migrate": "prisma migrate deploy",
     "build": "tsc -p .",
     "dev": "nodemon src/index.ts",
+    "db": "docker-compose up",
     "prepare": "husky install",
     "precommit-hook": "yarn run check-types && lint-staged",
     "check-types": "tsc --noEmit"

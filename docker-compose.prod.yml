@@ -4,4 +4,4 @@ services:
   bot:
     build:
       target: production
-    command: node build/index.js
+    command: yarn run start:migrate

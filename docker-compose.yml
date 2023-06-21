@@ -1,29 +1,28 @@
 version: '3.8'
 
 services:
-  bot:
-    container_name: aldi-tg-bot
-    restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: base
-    ports:
-      - ${PORT}:${PORT}
-    depends_on:
-      - db
-    volumes:
-      - .:/usr/src/app
-    expose:
-      - '3000'
-    ports:
-      - '3000:3000'
-    command: yarn run dev
-  db:
-    container_name: aldi-tg-bot-db
+  # bot:
+  #   container_name: aldi-tg-bot
+  #   restart: always
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #     target: base
+  #   ports:
+  #     - ${PORT}:${PORT}
+  #   depends_on:
+  #     - db
+  #   volumes:
+  #     - ./src:/usr/src/app/src
+  #     - ./nodemon.json:/usr/src/app/nodemon.json
+  #   expose:
+  #     - ${PORT}
+  #   command: yarn run dev:migrate
+  aldi-pg:
+    container_name: aldi-pg
     image: postgres
     ports:
-      - '5432:5432'
+      - ${DB_PORT}:${DB_PORT}
     volumes:
       - data:/data/db
     environment:
