@@ -25,11 +25,11 @@ expand(config());
 
 const tgToken = process.env.TG_TOKEN;
 if (!tgToken) throw new Error("No TG_TOKEN");
-const dbHost = process.env.DB_HOST;
-const dbName = process.env.DB_NAME;
-const dbUser = process.env.DB_USER;
-const dbPass = process.env.DB_PASSWORD;
-const dbPort = process.env.DB_PORT;
+const dbHost = process.env.POSTGRES_HOST;
+const dbName = process.env.POSTGRES_NAME;
+const dbUser = process.env.POSTGRES_USER;
+const dbPass = process.env.POSTGRES_PASSWORD;
+const dbPort = process.env.POSTGRES_PORT;
 if (!(dbHost && dbName && dbUser && dbPass && dbPort))
   throw new Error("No DB requisites");
 console.log(process.env.DATABASE_URL);

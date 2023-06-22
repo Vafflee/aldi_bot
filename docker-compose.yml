@@ -18,15 +18,11 @@ services:
     image: postgres:13
     restart: always
     ports:
-      - ${DB_PORT}:5432
+      - ${POSTGRES_PORT}:5432
     env_file:
       - .env
     volumes:
       - postgres:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
 volumes:
   postgres:
     name: aldi-bot_data
