@@ -1,5 +1,6 @@
 import { Postgres } from "@telegraf/session/pg";
 import { config } from "dotenv";
+import { expand } from "dotenv-expand";
 import { Markup, Scenes, Telegraf, session } from "telegraf";
 import { MAIN_BUTTONS } from "./constants/buttons";
 import { getRequestByUserId } from "./db/request";
@@ -20,16 +21,18 @@ import { sendRequestScene } from "./scenes/sendRequestScene";
 import { sendThankYouScene } from "./scenes/sendThankYouScene";
 import { thankYouScene } from "./scenes/thankyouScene";
 import { MyContext } from "./types";
-config();
+expand(config());
 
 const tgToken = process.env.TG_TOKEN;
+if (!tgToken) throw new Error("No TG_TOKEN");
 const dbHost = process.env.DB_HOST;
 const dbName = process.env.DB_NAME;
 const dbUser = process.env.DB_USER;
 const dbPass = process.env.DB_PASSWORD;
 const dbPort = process.env.DB_PORT;
-if (!tgToken) throw new Error("No TG_TOKEN");
-if (!(dbHost && dbName && dbUser && dbPass && dbPort)) throw new Error("No DB requisites")
+if (!(dbHost && dbName && dbUser && dbPass && dbPort))
+  throw new Error("No DB requisites");
+console.log(process.env.DATABASE_URL);
 
 const bot = new Telegraf<MyContext>(tgToken);
 

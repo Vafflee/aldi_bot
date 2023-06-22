@@ -1,15 +1,28 @@
-FROM node:18 as base
+FROM node:18 as builder
 
-WORKDIR /usr/src/app
+# Create app dir
+WORKDIR /app
 
-COPY ["package.json", "yarn.lock", "tsconfig.json", "nodemon.json", ".env", "./"]
+COPY package.json ./
+COPY yarn.lock ./
 COPY prisma ./prisma
-COPY ./src ./src
+COPY .env .
 
-RUN yarn cache clean && yarn install
-# RUN yarn run build
+RUN yarn install
 
-# CMD yarn run dev
-FROM base as production
+COPY . .
+
 RUN yarn run build
-# EXPOSE 3000
+
+FROM node:18
+
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/yarn.lock ./
+COPY --from=builder /app/.env ./
+COPY --from=builder /app/prisma ./prisma
+
+COPY --from=builder /app/build ./build
+
+EXPOSE 3000
+CMD [ "yarn", "run", "start:prod" ]
