@@ -5,7 +5,7 @@ import {
   getThanksByRecipientId,
   getThanksTotalByRecipientId,
 } from "../db/thankyou";
-import { onMenu } from "../handlers/main/onMenu";
+import { sendKbMenu } from "../handlers/main/sendKbMenu";
 import { onThanksRating } from "../handlers/thankyou/onThanksRating";
 import { formatThanks } from "../helpers/formatThanks";
 import { kbThankYou } from "../keyboards/kbThankYou";
@@ -38,7 +38,7 @@ thankYouScene.hears(THANKYOU_BUTTONS.CHECK_THANKYOU, (ctx) => {
 });
 thankYouScene.hears(THANKYOU_BUTTONS.RATING, onThanksRating);
 thankYouScene.hears(THANKYOU_BUTTONS.BACK, (ctx) =>
-  ctx.scene.leave().then(() => onMenu(ctx))
+  ctx.scene.leave().then(() => sendKbMenu(ctx))
 );
 thankYouScene.action(/^thanks-page-(\d+)$/, (ctx) => {
   if (ctx.isStaff)

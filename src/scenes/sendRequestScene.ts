@@ -2,7 +2,7 @@ import { Markup, Scenes } from "telegraf";
 import { FULL_NAME } from "../constants/regex";
 import { ROLES } from "../constants/userRoles";
 import { createRequest } from "../db/request";
-import { onMenu } from "../handlers/main/onMenu";
+import { sendKbMenu } from "../handlers/main/sendKbMenu";
 import { MyContext } from "../types";
 
 function endScene(ctx: MyContext) {
@@ -56,6 +56,6 @@ sendRequestScene.enter((ctx) =>
     Markup.keyboard(["Отмена"]).resize()
   )
 );
-sendRequestScene.leave((ctx) => onMenu(ctx));
+sendRequestScene.leave((ctx) => sendKbMenu(ctx));
 
 export { sendRequestScene };

@@ -97,6 +97,10 @@ const sendThankYouScene = new Scenes.WizardScene<MyContext>(
   inputMessageHandler
 );
 
+sendThankYouScene.hears("Отмена", (ctx) => {
+  endScene(ctx);
+});
+
 sendThankYouScene.enter((ctx) =>
   ctx.reply(
     'Пожалуйста, введите частичное или полное имя получателя, либо нажмите кнопку "Указать пользователя"',

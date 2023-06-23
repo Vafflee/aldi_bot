@@ -1,7 +1,7 @@
-import { kbMenu } from "../../keyboards/kbMenu";
 import { MyContext } from "../../types";
+import { sendKbMenu } from "./sendKbMenu";
 
 export function onMenu(ctx: MyContext) {
-  // console.log('Sending menu')
-  ctx.reply("Главное меню", kbMenu(ctx));
+  if (ctx.scene.current) ctx.scene.leave();
+  else sendKbMenu(ctx);
 }

@@ -1,26 +1,19 @@
 import { Postgres } from "@telegraf/session/pg";
 import { config } from "dotenv";
 import { expand } from "dotenv-expand";
-import { Markup, Scenes, Telegraf, session } from "telegraf";
-import { MAIN_BUTTONS } from "./constants/buttons";
-import { getRequestByUserId } from "./db/request";
-import { onAbout } from "./handlers/main/onAbout";
-import { onAdmin } from "./handlers/main/onAdmin";
-import { onHelp } from "./handlers/main/onHelp";
-import { onImBored } from "./handlers/main/onImBored";
-import { onInfo } from "./handlers/main/onInfo";
-import { onMenu } from "./handlers/main/onMenu";
-import { onSendRequest } from "./handlers/main/onSendRequest";
-import { onThankYou } from "./handlers/main/onThankYou";
+import { Scenes, Telegraf, session } from "telegraf";
 import { onStart } from "./handlers/onStart";
 import { setIsStaffAndIsAdmin } from "./middlewares/setIsStaff";
 import { useUser } from "./middlewares/useUser";
+import { mainModule } from "./modules/mainModule";
+import { requestsModule } from "./modules/requestsModule";
 import { adminScene } from "./scenes/adminScene";
 import { infoScene } from "./scenes/infoScene";
 import { sendRequestScene } from "./scenes/sendRequestScene";
 import { sendThankYouScene } from "./scenes/sendThankYouScene";
 import { thankYouScene } from "./scenes/thankyouScene";
 import { MyContext } from "./types";
+
 expand(config());
 
 const tgToken = process.env.TG_TOKEN;
@@ -32,7 +25,6 @@ const dbPass = process.env.POSTGRES_PASSWORD;
 const dbPort = process.env.POSTGRES_PORT;
 if (!(dbHost && dbName && dbUser && dbPass && dbPort))
   throw new Error("No DB requisites");
-console.log(process.env.DATABASE_URL);
 
 const bot = new Telegraf<MyContext>(tgToken);
 
@@ -58,57 +50,23 @@ const store = Postgres<object>({
 bot.use(session({ store }));
 
 // Use scenes
-const stage = new Scenes.Stage<MyContext>([
-  infoScene,
-  adminScene,
-  thankYouScene,
-  sendThankYouScene,
-  sendRequestScene,
-]);
+const stage = new Scenes.Stage<MyContext>(
+  [infoScene, adminScene, thankYouScene, sendThankYouScene, sendRequestScene],
+  {
+    default: "main",
+  }
+);
 bot.use(stage.middleware());
 
 bot.start(onStart);
-bot.hears(["/menu"], onMenu);
-bot.hears([MAIN_BUTTONS.ABOUT, "/about"], onAbout);
-bot.hears([MAIN_BUTTONS.HELP, "/help"], onHelp);
-bot.hears([MAIN_BUTTONS.INFO, "/info"], onInfo);
-// bot.hears([MAIN_BUTTONS.EMOTIONAL_HELP, "/emotional_help"], onEmotionalHelp);
-bot.hears([MAIN_BUTTONS.THANKYOU, "/thankyou"], onThankYou);
-bot.hears([MAIN_BUTTONS.ADMIN, "/admin"], onAdmin);
-bot.hears([MAIN_BUTTONS.SEND_REQUEST], onSendRequest);
-bot.hears([MAIN_BUTTONS.IMBORED, "/imbored"], onImBored);
-bot.hears("/wa", (ctx) => {
-  ctx.reply(
-    "Web app test",
-    Markup.inlineKeyboard([Markup.button.webApp("App", process.env.WEBAPP_URL)])
-  );
-});
 
-bot.action("request-send", async (ctx) => {
-  if (ctx.isStaff) return ctx.answerCbQuery("Вы уже сотрудник");
-  if (!ctx.user) return ctx.answerCbQuery("Пользователь не установлен");
-  try {
-    const request = await getRequestByUserId(ctx.user.id);
-    if (request) {
-      await ctx.answerCbQuery("Запрос уже отправлен, ожидайте ответа");
-    } else {
-      await ctx.scene.enter("sendrequest");
-    }
-    ctx.deleteMessage();
-  } catch (err) {
-    console.error(err);
-    ctx.answerCbQuery("Что-то пошло не так");
-  }
-});
-bot.action("request-cancel", async (ctx) => {
-  await ctx.deleteMessage();
-  ctx.answerCbQuery();
-});
+// Module for main commands
+bot.use(mainModule);
+
+// Module for sending staff role requests
+bot.use(requestsModule);
 
 bot.launch();
-bot.on("web_app_data", (ctx) => {
-  console.log(ctx.webAppData);
-});
 
 // Enable graceful stop
 process.once("SIGINT", () => bot.stop("SIGINT"));

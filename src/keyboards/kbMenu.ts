@@ -7,7 +7,6 @@ export const kbMenu = (ctx: MyContext) => {
   return Markup.keyboard([
     [b.ABOUT, b.HELP],
     [b.INFO],
-    // [Markup.button.text(b.EMOTIONAL_HELP, !ctx.isStaff)],
     [
       Markup.button.text(b.THANKYOU, !ctx.isStaff),
       Markup.button.text(b.IMBORED, !ctx.isStaff),
