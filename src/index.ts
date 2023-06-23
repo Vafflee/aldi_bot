@@ -7,6 +7,7 @@ import { setIsStaffAndIsAdmin } from "./middlewares/setIsStaff";
 import { useUser } from "./middlewares/useUser";
 import { mainModule } from "./modules/mainModule";
 import { requestsModule } from "./modules/requestsModule";
+import { addAdminScene } from "./scenes/addAdminScene";
 import { adminScene } from "./scenes/adminScene";
 import { infoScene } from "./scenes/infoScene";
 import { sendRequestScene } from "./scenes/sendRequestScene";
@@ -51,7 +52,14 @@ bot.use(session({ store }));
 
 // Use scenes
 const stage = new Scenes.Stage<MyContext>(
-  [infoScene, adminScene, thankYouScene, sendThankYouScene, sendRequestScene],
+  [
+    infoScene,
+    adminScene,
+    thankYouScene,
+    sendThankYouScene,
+    sendRequestScene,
+    addAdminScene,
+  ],
   {
     default: "main",
   }

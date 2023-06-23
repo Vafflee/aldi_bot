@@ -62,9 +62,9 @@ async function replyWithThanksPage(
       return ctx.reply('У вас пока нет полученных "Спасибо"');
 
     const kb = Markup.inlineKeyboard([
-      Markup.button.callback("Назад", `thanks-page-${page - 1}`, page === 1),
+      Markup.button.callback("⬅️", `thanks-page-${page - 1}`, page === 1),
       Markup.button.callback(
-        "Дальше",
+        "➡️",
         `thanks-page-${page + 1}`,
         ctx.scene.state.thanksTotalCount <= THANKS_PER_PAGE * page
       ),

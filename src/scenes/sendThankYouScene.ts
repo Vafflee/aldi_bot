@@ -1,4 +1,5 @@
 import { Markup, Scenes } from "telegraf";
+import { COMMON_BUTTONS } from "../constants/buttons";
 import { createThankYou } from "../db/thankyou";
 import { getUserByTgId, searchUsersByName } from "../db/user";
 import { onMenu } from "../handlers/main/onMenu";
@@ -26,7 +27,7 @@ const inputUserHandler = async (
     return ctx.wizard.next();
   }
   // on cancel
-  if ("text" in ctx.message && ctx.message.text === "Отмена")
+  if ("text" in ctx.message && ctx.message.text === COMMON_BUTTONS.CANCEL)
     return endScene(ctx);
   // on user_shared
   if ("user_shared" in ctx.message) {
@@ -58,7 +59,9 @@ const inputUserHandler = async (
       );
       for (const user of users) {
         await ctx.reply(
-          `${user.fullName} (${user.tgUsername}) - ${user.job}`,
+          `${user.fullName} ${
+            user.tgUsername ? "(@" + user.tgUsername + ")" : ""
+          } - ${user.job}`,
           Markup.inlineKeyboard([
             Markup.button.callback("Выбрать", user.id.toString()),
           ])
@@ -97,7 +100,7 @@ const sendThankYouScene = new Scenes.WizardScene<MyContext>(
   inputMessageHandler
 );
 
-sendThankYouScene.hears("Отмена", (ctx) => {
+sendThankYouScene.hears(COMMON_BUTTONS.CANCEL, (ctx) => {
   endScene(ctx);
 });
 
@@ -106,7 +109,7 @@ sendThankYouScene.enter((ctx) =>
     'Пожалуйста, введите частичное или полное имя получателя, либо нажмите кнопку "Указать пользователя"',
     Markup.keyboard([
       Markup.button.userRequest("Указать пользователя", 1),
-      "Отмена",
+      COMMON_BUTTONS.CANCEL,
     ]).resize()
   )
 );

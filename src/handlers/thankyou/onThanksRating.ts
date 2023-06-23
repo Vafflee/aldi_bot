@@ -1,11 +1,11 @@
 import { User } from "@prisma/client";
-import { getTopUsersByThanksCount } from "../../db/user";
+import { getTopStaffByThanksCount } from "../../db/user";
 import { MyContext } from "../../types";
 
 export const onThanksRating = async (ctx: MyContext) => {
   if (!ctx.isStaff) return;
 
-  const rating = await getTopUsersByThanksCount();
+  const rating = await getTopStaffByThanksCount();
   ctx.replyWithHTML(formatRating(rating));
 };
 

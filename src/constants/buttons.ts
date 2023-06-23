@@ -1,3 +1,10 @@
+export const COMMON_BUTTONS = {
+  BACK: "⬅️ Назад",
+  CANCEL: "⬅️ Отмена",
+  YES: "✅ Да",
+  NO: "❌ Нет",
+};
+
 export const MAIN_BUTTONS = {
   HELP: "❓ Помощь",
   ABOUT: "💁 О компании",
@@ -40,7 +47,8 @@ export const STAFF_BUTTONS = {
 
 export const ADMIN_BUTTONS = {
   CHECK_REQUESTS: "✉ Просмотреть запросы",
-  BACK: "← Назад",
+  ADD_ADMIN: "Добавить администратора",
+  BACK: "⬅️ Назад",
 };
 
 export const REQUESTS_BUTTONS = {
@@ -52,13 +60,10 @@ export const THANKYOU_BUTTONS = {
   SEND_THANKYOU: '✉ Отправить "Спасибо"',
   CHECK_THANKYOU: '📬 Полученные "Спасибо"',
   RATING: "🌟 Рейтинг сотрудников",
-  BACK: "← Назад",
-  CANCEL: "← Отмена",
+  BACK: "⬅️ Назад",
+  CANCEL: "⬅️ Отмена",
 };
 
 export const IWANT_BUTTONS = {
-  MEME: "Мем",
-  ADVISE: "Совет",
-  PREDICTION: "Предсказание",
-  BACK: "← Назад",
+  BACK: "⬅️ Назад",
 };

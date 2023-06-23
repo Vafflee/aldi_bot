@@ -27,7 +27,7 @@ export async function getUserByTgUsername(tgUsername: string) {
   });
 }
 
-export async function getTopUsersByThanksCount() {
+export async function getTopStaffByThanksCount() {
   return await db.user.findMany({
     include: {
       _count: {
@@ -35,6 +35,16 @@ export async function getTopUsersByThanksCount() {
           recievedThanks: true,
         },
       },
+    },
+    where: {
+      OR: [
+        {
+          role: ROLES.STAFF,
+        },
+        {
+          role: ROLES.ADMIN,
+        },
+      ],
     },
     orderBy: {
       recievedThanks: {

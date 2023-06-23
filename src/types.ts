@@ -27,6 +27,8 @@ interface MySceneContextScene
     totalPages?: number;
     // sendRequestScene
     fullName?: string;
+    // addAdminScene
+    newAdminId?: number;
   };
 }
 export interface MyContext extends Context {
