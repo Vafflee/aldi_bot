@@ -26,8 +26,8 @@ expand(config());
 const tgToken = process.env.TG_TOKEN;
 if (!process.env.TG_TOKEN) throw new Error("No TG_TOKEN");
 
-if (!process.env.YANDEX_OAUTH_TOKEN) throw new Error("No YANDEX_OAUTH_TOKEN");
-if (!process.env.YANDEX_PHOTOS_PATH) throw new Error("No YANDEX_PHOTOS_PATH");
+if (!process.env.YANDEX_PUBLIC_FOLDER_URL)
+  throw new Error("No YANDEX_PUBLIC_FOLDER_URL");
 
 const dbHost = process.env.POSTGRES_HOST;
 const dbName = process.env.POSTGRES_NAME;
