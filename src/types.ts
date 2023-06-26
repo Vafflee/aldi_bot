@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
-import { Context, Scenes } from "telegraf";
+import { Context, NarrowedContext, Scenes } from "telegraf";
+import { CallbackQuery, Update } from "telegraf/typings/core/types/typegram";
 
 // export type MyContext = Context &
 //   SceneContext & {
@@ -20,6 +21,7 @@ interface MySession extends Scenes.WizardSession<MyWizardSession> {
 interface MySceneContextScene
   extends Scenes.SceneContextScene<MyContext, MyWizardSession> {
   state: {
+    user?: User;
     // sendThankYouScene
     recipientId?: number;
     // thankYouScene
@@ -43,6 +45,19 @@ export interface MyContext extends Context {
   wizard: Scenes.WizardContextWizard<MyContext>;
 }
 
+export type MyContextWithMatch = NarrowedContext<
+  MyContext & {
+    match: RegExpExecArray;
+  },
+  Update.CallbackQueryUpdate<CallbackQuery>
+>;
+
+export type MyContextWithCallback = MyContext & {
+  callbackQuery: {
+    data: string;
+  };
+};
+
 export type UserRole = "User" | "Staff" | "Admin";
 
 export type NewUserInfo = {
@@ -54,3 +69,10 @@ export type NewUserInfo = {
 };
 
 export type NextFn = () => Promise<void>;
+
+export type DiskItem = {
+  name: string;
+  sha256: string;
+  path: string;
+  file: string;
+};

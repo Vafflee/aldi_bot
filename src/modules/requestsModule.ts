@@ -5,7 +5,7 @@ import { getRequestByUserId } from "../db/request";
 import { onSendRequest } from "../handlers/main/onSendRequest";
 
 export const requestsModule = new Composer<MyContext>();
-requestsModule.hears([MAIN_BUTTONS.SEND_REQUEST], onSendRequest);
+requestsModule.hears([MAIN_BUTTONS.SEND_REQUEST, "/request"], onSendRequest);
 requestsModule.action("request-send", async (ctx) => {
   if (ctx.isStaff) return ctx.answerCbQuery("Вы уже сотрудник");
   if (!ctx.user) return ctx.answerCbQuery("Пользователь не установлен");

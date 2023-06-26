@@ -3,7 +3,7 @@ import { COMMON_BUTTONS } from "../constants/buttons";
 import { FULL_NAME } from "../constants/regex";
 import { ROLES } from "../constants/userRoles";
 import { createRequest } from "../db/request";
-import { sendKbMenu } from "../handlers/main/sendKbMenu";
+import { sendKbMenu } from "../services/sendKbMenu";
 import { MyContext } from "../types";
 
 function endScene(ctx: MyContext) {

@@ -10,6 +10,7 @@ export async function approveRequest(requestId: number) {
       ...request.user,
       role: request.role,
       fullName: request.fullName,
+      job: request.job,
     };
     const updatedUser = await updateUser(user);
     // remove request

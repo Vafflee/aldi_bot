@@ -5,5 +5,6 @@ const b = ADMIN_BUTTONS;
 export const kbAdmin = Markup.keyboard([
   [b.CHECK_REQUESTS],
   [b.ADD_ADMIN],
+  [b.REMOVE_STAFF],
   [b.BACK],
 ]).resize();

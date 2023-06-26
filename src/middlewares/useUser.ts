@@ -16,10 +16,9 @@ export async function useUser(ctx: MyContext, next: NextFn) {
         tgId,
         tgUsername,
       }));
-    await next();
   } catch (err) {
-    console.log('! useUser.ts error !')
     console.error(err);
-    await next();
   }
+
+  await next();
 }

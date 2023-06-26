@@ -1,43 +1,52 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch", "postgresqlExtensions"]
-  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  binaryTargets   = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
   extensions = [pg_trgm]
 }
 
 model User {
-  id              Int     @id @default(autoincrement())
-  tgId            BigInt  @unique
-  tgUsername      String?
-  job             String?
-  role            String  @default("User")
-  requests        Request[]  @relation("SentRequests")
-  recievedThanks  ThankYou[] @relation("RecievedThanks")
+  id             Int        @id @default(autoincrement())
+  tgId           BigInt     @unique
+  tgUsername     String?
+  job            String?
+  role           String     @default("User")
   fullName       String?
+  requests       Request[]  @relation("SentRequests")
+  recievedThanks ThankYou[] @relation("RecievedThanks")
 }
 
 model ThankYou {
-  id            Int     @id @default(autoincrement())
-  recipientId   Int
-  recipient     User @relation("RecievedThanks", fields: [recipientId], references: [id])
-  creationDate  BigInt
-  message       String
+  id           Int    @id @default(autoincrement())
+  recipientId  Int
+  creationDate BigInt
+  message      String
+  recipient    User   @relation("RecievedThanks", fields: [recipientId], references: [id])
 }
 
 model Request {
-  id          Int     @id @default(autoincrement())
-  userId      Int
-  fullName    String
-  job         String
-  user        User    @relation("SentRequests", fields: [userId], references: [id])
-  role        String
-  isApproved  Boolean   @default(false)
+  id         Int     @id @default(autoincrement())
+  userId     Int
+  fullName   String
+  role       String
+  isApproved Boolean @default(false)
+  job        String
+  user       User    @relation("SentRequests", fields: [userId], references: [id])
+}
+
+model telegraf_sessions {
+  key     String  @id @db.VarChar(32)
+  session String?
+
+  @@map("telegraf-sessions")
+}
+
+model TgFileId {
+  sha256    String @unique
+  fileId    String
 }

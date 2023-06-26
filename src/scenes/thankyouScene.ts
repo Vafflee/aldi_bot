@@ -5,10 +5,10 @@ import {
   getThanksByRecipientId,
   getThanksTotalByRecipientId,
 } from "../db/thankyou";
-import { sendKbMenu } from "../handlers/main/sendKbMenu";
 import { onThanksRating } from "../handlers/thankyou/onThanksRating";
 import { formatThanks } from "../helpers/formatThanks";
 import { kbThankYou } from "../keyboards/kbThankYou";
+import { sendKbMenu } from "../services/sendKbMenu";
 import { MyContext } from "../types";
 
 const thankYouScene = new Scenes.BaseScene<MyContext>("thankyou");

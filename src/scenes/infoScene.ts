@@ -3,8 +3,8 @@ import { INFO_BUTTONS } from "../constants/buttons";
 import { onInstructions } from "../handlers/info/onInstructions";
 import { onMaps } from "../handlers/info/onMaps";
 import { onStaff } from "../handlers/info/onStaff";
-import { sendKbMenu } from "../handlers/main/sendKbMenu";
 import { kbInfo } from "../keyboards/kbInfo";
+import { sendKbMenu } from "../services/sendKbMenu";
 import { MyContext } from "../types";
 
 const infoScene = new Scenes.BaseScene<MyContext>("info");

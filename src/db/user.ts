@@ -57,7 +57,7 @@ export async function getTopStaffByThanksCount() {
 export async function searchUsersByName(
   name: string
 ): Promise<(User & { sml: number })[]> {
-  const sql = Prisma.sql`select u.*, sml from "User" u, similarity("fullName" , ${name}) as sml where (sml is not null and sml > 0) order by sml desc limit 3;`;
+  const sql = Prisma.sql`select u.*, sml from "User" u, similarity("fullName" , ${name}) as sml where (sml is not null and sml > 0 and role = 'STAFF') order by sml desc limit 3;`;
   return await db.$queryRaw(sql);
 }
 
