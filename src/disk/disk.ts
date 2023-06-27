@@ -5,7 +5,6 @@ const client = axios.create({
   baseURL: "https://cloud-api.yandex.net/v1/disk/",
   headers: {
     Accept: "application/json",
-    Authorization: "OAuth " + process.env.YANDEX_OAUTH_TOKEN,
   },
   params: {
     public_key: process.env.YANDEX_PUBLIC_FOLDER_URL,
@@ -24,6 +23,7 @@ const getResources = async (path: string) => {
       "public/resources",
       {
         params: {
+          public_key: process.env.YANDEX_PUBLIC_FOLDER_URL,
           path,
         },
       }
@@ -42,6 +42,7 @@ const downloadFile = async (path: string) => {
       "public/resources/download",
       {
         params: {
+          // public_key: process.env.YANDEX_PUBLIC_FOLDER_URL,
           path,
         },
       }

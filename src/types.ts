@@ -2,17 +2,8 @@ import { User } from "@prisma/client";
 import { Context, NarrowedContext, Scenes } from "telegraf";
 import { CallbackQuery, Update } from "telegraf/typings/core/types/typegram";
 
-// export type MyContext = Context &
-//   SceneContext & {
-//     user?: User;
-//     isStaff?: boolean;
-//     isAdmin?: boolean;
-//   };
-
 type MyWizardSession = Scenes.WizardSessionData;
 interface MySession extends Scenes.WizardSession<MyWizardSession> {
-  // will be available under `ctx.session.mySessionProp`
-  // mySessionProp: number;
   sendThankYou: {
     recipientUsername: string;
     message: string;
@@ -37,11 +28,8 @@ export interface MyContext extends Context {
   user?: User;
   isStaff?: boolean;
   isAdmin?: boolean;
-  // declare session type
   session: MySession;
-  // declare scene type
   scene: MySceneContextScene;
-  // declare wizard type
   wizard: Scenes.WizardContextWizard<MyContext>;
 }
 

@@ -17,7 +17,7 @@ export async function onGallery(ctx: MyContextWithMatch) {
 async function sendImagesInFolder(ctx: MyContext, path: string) {
   const resources = await disk.resources.get(path);
   const items = [...resources._embedded.items];
-  await ctx.reply(path);
+  await ctx.reply(path.replace("/", ""));
   while (items.length > 0) {
     const part = items.splice(0, 10);
     await sendItems(ctx, part);

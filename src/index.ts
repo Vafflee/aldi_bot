@@ -47,7 +47,7 @@ bot.telegram.setMyCommands([
   { command: "photos", description: "Открыть базу фотографий" },
   {
     command: "request",
-    description: "Отправить запрос да доступ к функциям для сотрудников",
+    description: "Отправить запрос на доступ к функциям для сотрудников",
   },
 ]);
 

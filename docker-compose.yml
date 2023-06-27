@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  aldi-bot:
-    container_name: aldi-bot
+  telegraf:
+    container_name: telegraf
     restart: always
     build:
       context: .
@@ -10,11 +10,11 @@ services:
     ports:
       - ${PORT}:3000
     depends_on:
-      - aldi-pg
+      - postgres
     env_file:
       - .env
-  aldi-pg:
-    container_name: aldi-pg
+  postgres:
+    container_name: postgres
     image: postgres:13
     restart: always
     ports:
