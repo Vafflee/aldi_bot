@@ -12,7 +12,7 @@ function endScene(ctx: MyContext) {
 
 const inputFullNameHandler = async (ctx: MyContext) => {
   if (!("text" in ctx.message)) return;
-  if (ctx.message.text === "Отмена") return endScene(ctx);
+  if (ctx.message.text === COMMON_BUTTONS.CANCEL) return endScene(ctx);
 
   const fullName = ctx.message.text.replace(/\s+/, " ");
   if (!fullName.match(FULL_NAME))

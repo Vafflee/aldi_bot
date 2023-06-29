@@ -7,10 +7,6 @@ export async function findUser(
   ctx: MyContextWithCallback,
   onError: (err: string) => void
 ) {
-  // // on cancel
-  // if ("text" in ctx.message && ctx.message.text === COMMON_BUTTONS.CANCEL)
-  //   return endScene(ctx);
-
   // on action
   if (ctx.callbackQuery) {
     ctx.answerCbQuery();
