@@ -12,7 +12,8 @@ export const URLS = {
   MAPS: {
     INNER_ROUTES:
       "https://development-alabuga.notion.site/ccab1ef1d3b444dd9499ec678cdf79b1",
-    ROUTES: "https://вахта-алабуга.рф",
+    ROUTES:
+      "https://development-alabuga.notion.site/5284b495d35d4f81ba16f816befdd4ba",
     ALABUGA:
       "https://www.google.com/maps/d/u/1/viewer?mid=1DC4KjTGLs9PRs_ukK_y823A6xMcl_DAk",
     ELABUGA:

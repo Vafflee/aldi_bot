@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id             Int        @id @default(autoincrement())
-  tgId           BigInt     @unique
+  tgId           Int        @unique
   tgUsername     String?
   job            String?
   role           String     @default("User")
@@ -24,7 +24,7 @@ model User {
 model ThankYou {
   id           Int    @id @default(autoincrement())
   recipientId  Int
-  creationDate BigInt
+  creationDate DateTime @default(now())
   message      String
   recipient    User   @relation("RecievedThanks", fields: [recipientId], references: [id])
 }

@@ -36,15 +36,15 @@ export const INSTRUCTIONS_BUTTONS = {
 };
 
 export const MAPS_BUTTONS = {
-  INNER_ROUTES: "🚍 Расписание автобуса в ОАЗ",
+  INNER_ROUTES: "🚍 Расписание автобуса в ОЭЗ",
   ROUTES: "🚍 Маршруты вахт",
-  ALABUGA: "🏘 ОАЗ Алабуга",
+  ALABUGA: "🏘 ОЭЗ Алабуга",
   ELABUGA: "🏙 Елабуга",
   OFFICE: "🏢 Офис",
 };
 
 export const STAFF_BUTTONS = {
-  SEZ: "👔 Сотрудники ОАЗ Алабуга",
+  SEZ: "👔 Сотрудники ОЭЗ Алабуга",
   ALABUGA_DEVELOPNEMT: "👔 Сотрудники Алабуга Девелопмент",
 };
 

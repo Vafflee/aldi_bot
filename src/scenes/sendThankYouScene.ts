@@ -1,7 +1,7 @@
 import { Markup, Scenes } from "telegraf";
 import { COMMON_BUTTONS } from "../constants/buttons";
 import { createThankYou } from "../db/thankyou";
-import { getUserByTgId, searchUsersByName } from "../db/user";
+import { getUser, getUserByTgId, searchUsersByName } from "../db/user";
 import { onMenu } from "../handlers/main/onMenu";
 import { MyContext } from "../types";
 
@@ -87,6 +87,17 @@ const inputMessageHandler = async (ctx: MyContext) => {
     const createdThankYou = await createThankYou(recipientId, ctx.message.text);
     if (!createdThankYou) throw new Error("Error in creating ThankYou");
     await ctx.reply('"Спасибо" успешно отправлено"');
+
+    // Try to send notification to recipient
+    try {
+      const recipient = await getUser(recipientId);
+      ctx.telegram.sendMessage(
+        Number(recipient.tgId),
+        `Вы получили новое спасибо: "${createdThankYou.message}"`
+      );
+    } catch (err) {
+      console.error(err);
+    }
   } catch (err) {
     console.error(err);
     await ctx.reply("Что-то пошло не так, попробуйте позже");

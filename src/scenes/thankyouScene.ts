@@ -33,7 +33,11 @@ thankYouScene.enter((ctx) =>
 thankYouScene.hears(THANKYOU_BUTTONS.SEND_THANKYOU, (ctx) => {
   if (ctx.isStaff) ctx.scene.enter("sendthankyou");
 });
-thankYouScene.hears(THANKYOU_BUTTONS.CHECK_THANKYOU, (ctx) => {
+thankYouScene.hears(THANKYOU_BUTTONS.CHECK_THANKYOU, async (ctx) => {
+  if (ctx.scene.state.thanksTotalCount > 0)
+    await ctx.reply(
+      `Вы получили уже ${ctx.scene.state.thanksTotalCount} "Спасибо" за этот месяц, продолжайте в том же духе! 😀`
+    );
   if (ctx.isStaff) replyWithThanksPage(ctx, 1, true);
 });
 thankYouScene.hears(THANKYOU_BUTTONS.RATING, onThanksRating);
