@@ -50,3 +50,8 @@ model TgFileId {
   sha256    String @unique
   fileId    String
 }
+
+model DiskPath {
+  id    Int     @id @default(autoincrement())
+  path  String  @unique
+}

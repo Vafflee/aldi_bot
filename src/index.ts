@@ -6,6 +6,7 @@ import { MAIN_BUTTONS } from "./constants/buttons";
 import { onChangeRole } from "./handlers/main/onChangeRole";
 import { onDisk } from "./handlers/main/onDisk";
 import { onGallery } from "./handlers/main/onGallery";
+import { onProject } from "./handlers/main/onProject";
 import { onStart } from "./handlers/onStart";
 import { setIsStaffAndIsAdmin } from "./middlewares/setIsStaff";
 import { useUser } from "./middlewares/useUser";
@@ -91,8 +92,10 @@ bot.use(mainModule);
 // Module for sending staff role requests
 bot.use(requestsModule);
 
-bot.hears([MAIN_BUTTONS.PHOTOS, "/photos"], onDisk);
-bot.action(/^gallery-(.*)$/, onGallery);
+// bot.hears([MAIN_BUTTONS.PHOTOS, "/photos"], onDisk);
+bot.action(/^projects-(.*)$/, onDisk);
+bot.action(/^pr-(.*)$/, onProject);
+bot.action(/^ga-(.*)$/, onGallery);
 
 bot.hears(
   [MAIN_BUTTONS.IM_NOT_AN_ADMIN, MAIN_BUTTONS.IM_NOT_A_STAFF, "/changerole"],
